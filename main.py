@@ -20,6 +20,9 @@ while True:
             # Завершаем программу
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.KEYDOWN and event.scancode in [30, 31, 32]:
+            map.change_type(event.scancode)
+            view_map(screen)
     pygame.display.flip()
     clock.tick(60)
 
