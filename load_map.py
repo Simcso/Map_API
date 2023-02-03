@@ -15,8 +15,12 @@ class Map:
         map_params = {"ll": f"{adress[0]},{adress[1]}", "spn": f"{delta},{delta}", "l": type}
         Image.open(BytesIO(requests.get(map_api_server, params=map_params, proxies=proxyDict).content)).save(name)
 
-    def change_delta(self, delta):
-        self.__init__(self.adress, str(float(self.delta) + delta), self.type, self.name)
+    def change_delta(self, step):
+        try:
+            self.__init__(self.adress, str(eval(self.delta + step + str(float(self.delta) / 1.4))),
+                          self.type, self.name)
+        except Exception:
+            pass
 
 
 def view_map(screen):

@@ -10,7 +10,7 @@ view_map(screen)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.scancode in [78, 75]:
-            map.change_delta(0.1 if event.scancode == 78 else -0.1)
+            map.change_delta('+' if event.scancode == 78 else '-')
             view_map(screen)
         elif event.type == pygame.KEYDOWN and event.scancode == 41:
             # Завершаем программу
