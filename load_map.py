@@ -4,8 +4,8 @@ import requests
 import pygame
 
 
-proxyDict = {"http": ,
-                 "https": }
+proxyDict = {"http": 'http://s2021010055:lazur2097584+@proxy.volgatech.net:3128',
+                 "https": 'http://s2021010055:lazur2097584+@proxy.volgatech.net:3128'}
 map_api_server = "http://static-maps.yandex.ru/1.x/"
 
 
@@ -19,6 +19,14 @@ class Map:
         try:
             self.__init__(self.adress, str(eval(self.delta + step + str(float(self.delta) / 1.4))),
                           self.type, self.name)
+        except Exception:
+            pass
+
+    def change_cords(self, cords):
+        try:
+            self.__init__((self.adress[0] + float(cords[0] + str(int(self.delta) / 2)) if cords[0] else self.adress[0],
+                           self.adress[1] + float(cords[1] + str(int(self.delta) / 2)) if cords[1] else self.adress[1]),
+                          self.delta, self.type, self.name)
         except Exception:
             pass
 
