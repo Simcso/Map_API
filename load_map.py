@@ -4,8 +4,8 @@ import requests
 import pygame
 
 
-proxyDict = {"http": 'http://s2021010055:lazur2097584+@proxy.volgatech.net:3128',
-                 "https": 'http://s2021010055:lazur2097584+@proxy.volgatech.net:3128'}
+proxyDict = {"http": ,
+                 "https": }
 map_api_server = "http://static-maps.yandex.ru/1.x/"
 
 
