@@ -1,17 +1,21 @@
 import sys
 import pygame
-from load_map import load_map
+from load_map import Map, view_map
 
-load_map((47.8908, 56.6388))
 
+clock = pygame.time.Clock()
 screen = pygame.display.set_mode()
-screen.fill('gray')
-screen.blit(pygame.transform.scale(pygame.image.load('map.png'),
-                                   (screen.get_width() - 400, screen.get_height() - 100)), (350, 50))
+map = Map((47.8908, 56.6388))
+view_map(screen)
 while True:
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN and event.scancode == 41:
+        if event.type == pygame.KEYDOWN and event.scancode in [78, 75]:
+            map.change_delta(0.1 if event.scancode == 78 else -0.1)
+            view_map(screen)
+        elif event.type == pygame.KEYDOWN and event.scancode == 41:
             # Завершаем программу
             pygame.quit()
             sys.exit()
     pygame.display.flip()
+    clock.tick(60)
+
