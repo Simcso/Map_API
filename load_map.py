@@ -4,8 +4,6 @@ import requests
 import pygame
 
 
-proxyDict = {"http": 'http://s2021010055:lazur2097584+@proxy.volgatech.net:3128',
-                 "https": 'http://s2021010055:lazur2097584+@proxy.volgatech.net:3128'}
 map_api_server = "http://static-maps.yandex.ru/1.x/"
 map_types = {30: 'map', 31: 'sat', 32: 'sat,skl'}
 
@@ -14,7 +12,7 @@ class Map:
     def __init__(self, adress, delta='0.05', type='map', name='map.png'):
         self.adress, self.delta, self.type, self.name = adress, delta, type, name
         map_params = {"ll": f"{adress[0]},{adress[1]}", "spn": f"{delta},{delta}", "l": type}
-        Image.open(BytesIO(requests.get(map_api_server, params=map_params, proxies=proxyDict).content)).save(name)
+        Image.open(BytesIO(requests.get(map_api_server, params=map_params).content)).save(name)
 
     def change_delta(self, step):
         try:
