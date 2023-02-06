@@ -1,6 +1,6 @@
 import sys
 import pygame
-from load_map import Map, view_map, find_toponym, TextInput
+from load_map import *
 
 
 pygame.init()
@@ -11,9 +11,12 @@ cords = find_toponym('Йошкар-Ола')
 map = Map(cords, cords)
 view_map(screen)
 
-text = TextInput(screen, 20, 20, 300, 30, 'Введите запрос', 20)
+text = TextInput(screen, 20, 30, 265, 30, 'Введите запрос', 20)
+but = Button(screen, 290, 30, 50, 30, 'DEL', 20)
 while True:
     text.update()
+    if but.update(map):
+        map = but.update(map)
     for event in pygame.event.get():
         if text.text_input:
             if event.type == pygame.TEXTINPUT:

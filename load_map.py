@@ -55,6 +55,51 @@ class TextInput:
         self.screen.blit(self.Surface, self.Rect)
 
 
+class Button:
+    def __init__(self, screen, x, y, width, height, text, font_size=40, font_name='Arial'):
+        self.screen, self.x, self.y, self.width, self.height, self.text = screen, x, y, width, height, text
+        self.text_input, self.font_name, self.font_size = False, font_name, font_size
+        self.Surface = pygame.Surface((self.width, self.height))
+        self.Surface.fill('black')
+        rect = pygame.Surface((self.width - 4, self.height - 4))
+        rect.fill('white')
+        self.Surface.blit(rect, (2, 2))
+        self.Rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        # Создаём шрифт нужно цвета
+        self.Text = pygame.font.SysFont(self.font_name, self.font_size).render(self.text, True, 'grey')
+        # Добавляем текст на поверхность
+        self.Surface.blit(self.Text, [self.Rect.width / 2 - self.Text.get_rect().width / 2,
+                                      self.Rect.height / 2 - self.Text.get_rect().height / 2])
+        # Накладываем поверхность поверх экрана
+        self.screen.blit(self.Surface, self.Rect)
+
+    def update(self, map):
+        self.Surface = pygame.Surface((self.width, self.height))
+        self.Surface.fill('black')
+        rect = pygame.Surface((self.width - 4, self.height - 4))
+        rect.fill('white')
+        self.Surface.blit(rect, (2, 2))
+        # Создаём шрифт нужно цвета
+        self.Text = pygame.font.SysFont(self.font_name, self.font_size). \
+            render(self.text, True, 'black' if self.text_input else 'gray')
+        # Проверяем находиться ли курсор на кнопке
+        if self.Rect.collidepoint(pygame.mouse.get_pos()):
+            # Создаём шрифт нужно цвета
+            self.Text = pygame.font.SysFont(self.font_name, self.font_size). \
+                render(self.text, True, '#666666')
+            # Проверяем нажата ли кнопка
+            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                cords = find_toponym('Йошкар-Ола')
+                map = Map(cords, cords)
+                view_map(self.screen)
+                return map
+        # Добавляем текст на поверхность
+        self.Surface.blit(self.Text, [self.Rect.width / 2 - self.Text.get_rect().width / 2,
+                                      self.Rect.height / 2 - self.Text.get_rect().height / 2])
+        # Накладываем поверхность поверх экрана
+        self.screen.blit(self.Surface, self.Rect)
+
+
 class Map:
     def __init__(self, cords, point=None, delta='0.05', type='map', name='map.png'):
         self.cords, self.point, self.delta, self.type, self.name = cords, point, delta, type, name
