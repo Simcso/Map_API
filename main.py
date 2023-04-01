@@ -16,7 +16,7 @@ but = Button(screen, 290, 30, 50, 30, 'DEL', 20)
 while True:
     text.update()
     if but.update(map):
-        map = but.update(map)
+        map = but.update(text.get_text())
     for event in pygame.event.get():
         if text.text_input:
             if event.type == pygame.TEXTINPUT:

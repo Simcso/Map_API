@@ -73,7 +73,7 @@ class Button:
         # Накладываем поверхность поверх экрана
         self.screen.blit(self.Surface, self.Rect)
 
-    def update(self, map):
+    def update(self, t):
         self.Surface = pygame.Surface((self.width, self.height))
         self.Surface.fill('black')
         rect = pygame.Surface((self.width - 4, self.height - 4))
@@ -89,8 +89,8 @@ class Button:
                 render(self.text, True, '#666666')
             # Проверяем нажата ли кнопка
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
-                cords = find_toponym('Йошкар-Ола')
-                map = Map(cords, cords)
+                cords = find_toponym(t)
+                map = Map(cords)
                 view_map(self.screen)
                 return map
         # Добавляем текст на поверхность
